@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "casepro": {
+      "type": "http",
+      "url": "https://casepro-mcp-v2.omnisai.io/mcp/v2"
+    }
+  }
+}
