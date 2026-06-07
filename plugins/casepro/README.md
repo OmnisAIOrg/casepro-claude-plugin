@@ -11,11 +11,11 @@ Your permissions are exactly your CasePro permissions — Claude only sees what 
 ## Install (Claude Code)
 
 ```
-/plugin marketplace add https://casepro-app.omnisai.io/claude/marketplace.json
+/plugin marketplace add OmnisAIOrg/casepro-claude-plugin
 /plugin install casepro@casepro-tools
 ```
 
-Then Claude will prompt you to sign in to CasePro in your browser. Approve it, and you're done.
+Then Claude will prompt you to sign in to CasePro in your browser. Approve it, and you're done. (You need access to the OmnisAIOrg GitHub — the same access you use for the rest of CasePro's tooling.)
 
 ## Use it
 
