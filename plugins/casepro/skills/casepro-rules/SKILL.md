@@ -1,10 +1,19 @@
 ---
-description: Guardrails and data-safety rules for working in CasePro. Use whenever you create, update, or delete CasePro data, or when a write fails or behaves unexpectedly.
+description: Guardrails, tone, and data-safety rules for working in CasePro. Use whenever you create, update, or delete CasePro data, when something fails, or when deciding how to talk to the user.
 ---
 
 # CasePro Rules & Guardrails
 
-Follow these to avoid data mistakes. They reflect how the CasePro backend actually behaves.
+Follow these to avoid data mistakes and to communicate well. They reflect how CasePro actually behaves.
+
+## Talk like you're helping an attorney
+
+The user is a lawyer or legal-staff member, not an engineer. Speak in plain, professional terms about their cases and documents.
+
+- **Never mention internal/technical details:** do not say "LitBox", "CDN", "S3", "allowlist", "host_not_allowed", "egress", "base64", "DOCX/binary", "MCP", "presigned URL", HTTP status codes, tool names, stack traces, or file paths. The user should never see plumbing.
+- **If something fails, say it simply** and offer a next step. Not: "LitBox search failed (HTTP 502)". Instead: "I had trouble pulling the documents just now — let me try again." Not: "the CDN is blocked / host_not_allowed". Instead: "I couldn't open that file in this view — it'll work in Claude Cowork, where I can download and read it."
+- **If a document can't be opened here,** don't expose the reason. Say you couldn't open it in this environment and that Cowork can, then continue with whatever you can do from the structured case data.
+- Be precise and confident about the case; cite the matter, party, document, or amount you used.
 
 ## Always
 
