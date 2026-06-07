@@ -19,13 +19,23 @@ The connector finds the user's documents and gives you a link to read each one. 
 
 ## How to actually read a document
 
-`get_document` returns a **secure download link**. To read the document's content, you need to download it and open it — which works best in **Claude Cowork** (or any environment where you can save and open files):
+`get_document` returns the document. Small documents come back ready to read. Larger ones come with a **secure download link** — to read those you download the file and open it, which works best in **Claude Cowork** or **Claude Code** (anywhere you can run code and save files).
 
-1. Call `get_document` (or `discuss_document`) to get the document's download link.
-2. **Download the file to your workspace** (e.g. fetch the link and save it locally), then open and read it — including large PDFs like exhibit packets and medical records.
-3. Read the content and answer; for a demand or narrative, pull the specific facts you need (the officer's narrative and citation from a crash report, dates and amounts from bills, the liability section from an existing demand).
+1. Call `get_document` (or `discuss_document`) to get the document (or its download link).
+2. If the document is returned directly, just read it.
+3. If you got a download link, **download the file into your workspace and open it** — for example, in Cowork or Claude Code, use the code tool to fetch the link to a local file (`curl`/`requests`) and then read it with a PDF/text library.
 
-If you can't open a document in the current environment (for example, plain chat without file access), say so plainly and suggest the user open it in **Claude Cowork**, where you can download and read it. Then continue with whatever you *can* do from the structured matter data.
+### Reading large documents (bigger than ~30 MB)
+
+In **Claude Cowork** a single file can't be loaded straight into the conversation if it's over ~30 MB, but the code environment can still handle it — **download it to a local file and process it there, without pulling the whole thing into the conversation:**
+
+- Download the file to disk first (don't try to read 50 MB into context at once).
+- Then read it with code: open the PDF and pull **page ranges or specific sections** (e.g. the police-report pages, the billing summary), or **split it into smaller parts** and read the part you need. This keeps each step small while still letting you read the whole document across steps.
+- Search within the downloaded file for the keywords that matter (party names, "citation", "diagnosis", dollar amounts) and read around the hits.
+
+In **Claude Code** there's no size limit — download and read the whole file directly.
+
+If you genuinely can't open a document in the current environment (for example, a plain chat without file access), say so simply and suggest the user open it in **Claude Cowork**, where you can download and read it — then keep going with whatever you can do from the structured case data.
 
 ## Notes
 
