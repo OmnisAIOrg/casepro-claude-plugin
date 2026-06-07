@@ -6,6 +6,13 @@ description: Core CasePro concepts and how to drive the connector's tools. Use w
 
 CasePro is a legal-CRM for personal-injury law firms. You are connected via the **casepro** MCP connector and act on behalf of the signed-in user, automatically scoped to their organization. You never need a URL, API key, or org id — the OAuth connection handles all of that.
 
+## Before you start: connection & sign-in
+
+This skill tells you HOW to use CasePro, but the actual work happens through the **casepro connector tools** — `execute_operation`, `query_entities`, `get_entity`, `list_schema`, `search_documents`, `get_document`, `discuss_document`, and similar.
+
+- **If those tools are NOT available in this chat:** the CasePro connector is installed but not turned on/connected for this conversation. Tell the user plainly: *"Please enable the CasePro connector for this chat and sign in to CasePro."* In Claude web/desktop they enable it from the connectors/tools menu for the conversation; the first call prompts a browser sign-in. **Do NOT try to do CasePro work through a web browser or any other tool** — only the connector tools.
+- **If a tool call comes back not-signed-in / unauthorized:** tell the user to sign in to CasePro (the connector shows a Connect / sign-in prompt; approving it in the browser is all that's needed), then retry. Never fall back to browsing the CasePro website.
+
 ## Core terminology
 
 - **Matter** — a case/claim. The central record. Has a `matter_name`, `matter_number` (auto, e.g. `CP-2026-001`), `status`, an immutable link to an intake questionnaire, and arrays of parties.

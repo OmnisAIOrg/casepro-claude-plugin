@@ -6,6 +6,8 @@ description: Search and read CasePro / LitBox documents. Use whenever the user w
 
 The connector can search the user's document store and return documents for you to read **natively** — you read the PDF/image directly (no copy-paste, no OCR step needed). Access respects the user's own document permissions.
 
+**First, make sure the connector is available.** If the `search_documents` / `get_document` tools aren't present in this chat, the CasePro connector isn't enabled here — ask the user to enable the CasePro connector for this conversation and sign in. **Do NOT download or open documents through a web browser**; only use the connector tools below.
+
 ## Tools
 
 - **search_documents** — deep search across the user's documents.
