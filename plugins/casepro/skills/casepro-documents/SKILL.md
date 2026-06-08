@@ -14,16 +14,24 @@ The connector finds the user's documents and gives you a link to read each one. 
   - `query`: keywords. `filter`: `all` (default), `files`, `folders`, `content`, `tags`. Use `content` to search text *inside* documents.
   - Optional: `folderId`, `mimeTypes` (e.g. `application/pdf`), `page`, `pageSize`.
   - Returns each match with a **`file_id`**.
-- **get_document** — fetch a document by `file_id`. Returns the document's metadata and a secure, time-limited download link.
+- **get_document** — fetch a document by `file_id`. Returns the document and/or a secure, time-limited **download link**.
 - **discuss_document** — give it a `file_id` OR a `query` (picks the best match) and it returns the document to discuss.
+
+**Always get the `file_id` from `search_documents` (or `discuss_document`).** Do NOT pass a document id you got from somewhere else (a matter's document records, a CRM query, a URL the user pasted) — those are different ids and `get_document` will reject them. If you only have a file's name, `search_documents` for it first and use the `file_id` it returns.
 
 ## How to actually read a document
 
-`get_document` returns the document. Small documents come back ready to read. Larger ones come with a **secure download link** — to read those you download the file and open it, which works best in **Claude Cowork** or **Claude Code** (anywhere you can run code and save files).
+`get_document` returns the document in the form that fits its type:
 
-1. Call `get_document` (or `discuss_document`) to get the document (or its download link).
-2. If the document is returned directly, just read it.
-3. If you got a download link, **download the file into your workspace and open it** — for example, in Cowork or Claude Code, use the code tool to fetch the link to a local file (`curl`/`requests`) and then read it with a PDF/text library.
+- **Images** (PNG/JPG/…) — returned inline so you can view them directly, **plus** a download link.
+- **PDFs** — returned as the document's extracted/OCR **text** so you can read it (scales to long medical-record packets), **plus** a download link to the original.
+- **Everything else** (DOCX, XLSX, …) — returned as a **download link** (a direct, time-limited URL to the original file). Open the link to read or save it.
+
+So for anything that isn't an image, you'll get a **download link**. To read or save it:
+
+1. Call `get_document` (or `discuss_document`).
+2. If it returns content directly (image, or PDF text), just read it.
+3. If you got a **download link**, **download the file and open it** — in **Claude Code** open it directly (any size); in **Claude Cowork** use the code tool to fetch the link to a local file (`curl`/`requests`) and then read it (e.g. a DOCX/PDF library) — or save it to a folder. The link is a real download URL for the original, so you can write the file to disk.
 
 ### Reading large documents (bigger than ~30 MB)
 
