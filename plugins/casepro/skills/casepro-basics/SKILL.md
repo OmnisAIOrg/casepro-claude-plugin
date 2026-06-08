@@ -32,6 +32,8 @@ The connector exposes generic, schema-driven tools — you drive them with the e
 - **list_schema** — discover tables, columns, types, and allowed values. **Call this first whenever you are unsure** of a table name, a column, or an enum value. Never invent them.
 - **create_entity / update_entity / execute_workflow** and other write tools for mutations. Prefer **validate_operation** (a dry run) before a risky write.
 - **search_documents / get_document / discuss_document** — find and read the user's documents (see the documents skill).
+- **search_document_templates / get_document_template** — the firm's saved letter/demand templates and letterheads.
+- **whoami** — the signed-in user and their organization (the **law firm** — name, contact details). Call this whenever you need the firm name or the user's name; never guess them.
 
 ## Golden rules
 

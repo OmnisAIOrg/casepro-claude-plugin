@@ -44,9 +44,17 @@ Get all tasks for matter {matter_id} and return all fields
 
 Then resolve the people: take the `plaintiff`/`defendant` party ids from the matter and the `party_id`/adjuster ids from providers and insurances, and `Get party {id} and return full_name, party_name, record_type, email, mobile_number, address` for each.
 
+## Whose case is it — the firm and the user
+
+Never guess the **law firm's name** or the user's name. Call **whoami** — it returns the real firm (organization name, contact details) and the signed-in user. Use exactly what it returns on any letter, demand, or signature block.
+
+## Letterheads and templates
+
+The firm's saved **letterheads and letter/demand templates** are document templates. Use **search_document_templates** to find them and **get_document_template** to fetch one — it returns the template body (`html_content`) and its placeholder fields. Before drafting a demand or letter, check for an existing template so you match the firm's format and letterhead, then fill the placeholders with the real matter and firm data (from the matter records and whoami). If the firm has no matching template, draft cleanly in a professional format.
+
 ## 4. Task playbooks
 
-- **Demand letter:** matter facts + injuries + every provider with itemized bills (totals, reductions) + insurances (policy limits, claim numbers, adjusters) + liens + the relevant documents (crash report, medical records, existing demand draft — see the documents skill). Build the medical-specials total from the bills.
+- **Demand letter:** start with whoami (firm name + contact for the letterhead) and check document templates for the firm's demand format. Then gather matter facts + injuries + every provider with itemized bills (totals, reductions) + insurances (policy limits, claim numbers, adjusters) + liens + the relevant documents (crash report, medical records, existing demand draft — see the documents skill). Build the medical-specials total from the bills.
 - **Liability narrative:** matter incident facts (description, geometry, date/time/location) + the crash/police report and any liability evidence from documents + litigation `positive_facts`/`negative_facts`/`trial_story` if present + witness records + the at-fault insurance's `liability_percentage`. Read the actual crash report (documents skill) — don't infer the officer's findings.
 - **Settlement / case status:** injuries + bills total + liens + negotiations history + insurance limits + litigation deadlines.
 
