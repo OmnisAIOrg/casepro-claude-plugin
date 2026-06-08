@@ -17,6 +17,15 @@ Your permissions are exactly your CasePro permissions — Claude only sees what 
 
 Then Claude will prompt you to sign in to CasePro in your browser. Approve it, and you're done. (You need access to the OmnisAIOrg GitHub — the same access you use for the rest of CasePro's tooling.)
 
+## Updates
+
+This plugin auto-updates: every new release is published to `main`, and Claude picks it up when it refreshes the marketplace (turn on **auto-update** for the marketplace in the Plugins screen so it happens automatically).
+
+If you're stuck on an old version and the **Update** button is greyed out, your app cached the old marketplace. To force a clean refresh:
+
+- **Claude Code:** `/plugin marketplace update casepro-tools` then `/plugin update casepro@casepro-tools`. If still stuck: `/plugin marketplace remove casepro-tools` then re-add and reinstall.
+- **Claude desktop / web:** in **Customize → Plugins → Marketplaces**, **remove** the casepro marketplace entirely, then re-add it (`OmnisAIOrg/casepro-claude-plugin`) and install again. (Removing the *marketplace* clears the cache — uninstalling just the plugin does not.)
+
 ## Use it
 
 Just ask. For example:
