@@ -12,7 +12,8 @@
       "description": "CasePro legal-CRM for Claude: search and read your matter documents, run intake and case workflows, and query your CRM in plain English. Bundles the secure CasePro connector (OAuth).",
       "author": {
         "name": "OmnisAIOrg"
-      }
+      },
+      "version": "1.4.0"
     }
   ]
 }
